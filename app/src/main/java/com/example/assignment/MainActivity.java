@@ -13,17 +13,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     WebView browse;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         browse=findViewById(R.id.webview);
         Intent i = getIntent();
-        if(i.getData() != null){
-            browse.loadUrl(i.getData().toString());
+        if (i.getAction().equals(Intent.ACTION_PROCESS_TEXT))
+        {
+            url=i.getCharSequenceExtra(i.EXTRA_PROCESS_TEXT).toString();
+            browse.loadUrl(url);
         }
     }
 }
